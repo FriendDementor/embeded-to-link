@@ -1,7 +1,7 @@
 var sendBtn = document.getElementById("send");
 var inputArea = document.getElementById("input");
 var linkOut = document.getElementById("link");
-var decoderUrl = "file:///C:/Users/Dementor/embed-to-link/decoder/index.html?code="
+var decoderUrl = "https://mercurio.host/decoder/?c="
 var out = document.getElementById("out");
 
 function utf8_to_b64(str) {
