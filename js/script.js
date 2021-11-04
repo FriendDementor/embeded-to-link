@@ -4,6 +4,18 @@ var linkOut = document.getElementById("link");
 var decoderUrl = "https://mercurio.host/decoder/?c="
 var out = document.getElementById("out");
 
+function b64_to_b64url(str){
+    str = str.replaceAll('+','-');
+    str = str.replaceAll('/','_');
+    return str;
+}
+
+function b64url_to_b64(str){
+    str = str.replaceAll('-','+');
+    str = str.replaceAll('_','/');
+    return str;
+}
+
 function utf8_to_b64(str) {
     return window.btoa(unescape(encodeURIComponent(str)));
 }
@@ -12,9 +24,17 @@ function b64_to_utf8(str) {
     return decodeURIComponent(escape(window.atob(str)));
 }
 
+function encode(str){
+    return b64_to_b64url(utf8_to_b64(str));
+}
+
+function decode(str){
+    return b64_to_utf8(b64url_to_b64(str));
+}
+
 if (sendBtn != null) {
     sendBtn.onclick = function () {
-        linkOut.innerHTML = decoderUrl + utf8_to_b64(inputArea.value)
+        linkOut.innerHTML = decoderUrl + encode(inputArea.value)
     }
 }
 
@@ -24,7 +44,7 @@ if (out != null) {
         var c = url.searchParams.get("c");
         var out;
         try {
-            out = b64_to_utf8(c);
+            out = decode(c);
         }
         catch (URIError) {
             out = "invalid parameter";
