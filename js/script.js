@@ -28,6 +28,7 @@ if (out != null) {
         }
         catch (URIError) {
             out = "invalid parameter";
+            console.log(c);
         }
         document.getElementsByTagName('body')[0].innerHTML = out;
     }
